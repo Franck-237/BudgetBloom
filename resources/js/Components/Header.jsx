@@ -13,19 +13,22 @@ const Header = () => {
     <div className=''>
       <div className='bg-slate-200 pb-10'>
         <div className='container mx-auto px-5 md:px-10 lg:px-20 pt-5 flex flex-col md:flex-row items-center justify-between gap-5 md:gap-10 lg:gap-20'>
-            <div className='text-[14px] md:text-[16px] lg:text-[18px] flex flex-col gap-10'>
-                <p className='md:w-1/2'>Take control of your finances with <span className='inline text-[#5038ED] text-[16px] md:text-[18px] lg:text-[20px] font-bold'>BudgetBloom</span></p>
+            <div className='flex flex-col gap-10'>
+              <div>
+                  <h1 className='font-bold text-[16px] md:text-[18px] lg:text-[24px]'>Welcome dear,</h1>
+              </div>
+                <h1 className='font-semibold'>Take control of your finances with <span className='inline text-[#5038ED] text-[16px] md:text-[18px] lg:text-[20px] font-bold'>BudgetBloom</span></h1>
                 <p>Say goodbye to scattered receipts and forgotten expenses. Track your income and spending in real-time with our intuitive interface. Every penny categorized and accounted for, giving you a clear picture of your financial landscape.</p>
             </div>
-            <div>
+            <div className='w-[400px] md:w-[800px] lg:w-[1400px]'>
                 <img src={teacher} alt=""/>
             </div>
         </div>
       </div>
         <div className='text-center pt-20 pb-5'>
-          <p className='font-bold text-[16px] md:text-[18px] lg:text-[20px]'>Our Partners</p>
+          <p className='font-bold text-[16px] md:text-[18px] lg:text-[24px] text-[#5038ED]'>Our Partners</p>
         </div>
-        <div className='bg-slate-100/90 mb-10'>
+        <div className='bg-slate-50 mb-10'>
           <div className='container mx-auto px-5 md:px-10 lg:px-20 py-5 flex flex-col justify-center items-center gap-10 md:gap-20'>
             <div className='flex justify-center items-center gap-5 md:gap-32 flex-wrap'>
               <img src={logo1}alt="" />

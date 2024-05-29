@@ -1,19 +1,29 @@
 import React, { useState } from 'react';
 import SecondaryButton from './SecondaryButton';
 import PrimaryButton from './PrimaryButton';
-import { useForm } from '@inertiajs/react';
+import { useForm, usePage } from '@inertiajs/react';
 
 import { FaHome } from "react-icons/fa";
 import { MdOutlineAttachMoney } from "react-icons/md";
 import { IoSettingsSharp } from "react-icons/io5";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoMdClose } from "react-icons/io";
+import Homedash from './Homedash';
+import Transdash from './Transdash';
 
-const Dash = ({ auth }) => {
+const Dash = () => {
 
     const [nav, setNav] = useState(false);
 
-    const { post, processing } = useForm({});
+    const [onglet, setOnglet] = useState(false);
+
+
+    const user = usePage().props.auth.user;
+
+    const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
+        name: user.name,
+        email: user.email,
+    });
 
     const submit = (e) => {
         e.preventDefault();
@@ -29,19 +39,21 @@ const Dash = ({ auth }) => {
                     <RxHamburgerMenu className='text-white text-[25px] md:hidden'/>
                 </div>
                 <div className={`flex items-center justify-center gap-5 pb-20 ${nav ? 'left-[-1000px]' : 'left-10'}`}>
-                    <p className={`text-white md:text-[#5038ED] text-[16px] md:text-[20px] lg:text-[24px] font-bold ${nav ? 'block' : 'hidden'} md:block`}><a href="/">BudgetBloom</a></p>
+                    <p className={`text-white md:text-[#5038ED] text-[14px] md:text-[16px] lg:text-[18px] font-bold ${nav ? 'block' : 'hidden'} md:block`}><a href="/">BudgetBloom</a></p>
                     <IoMdClose className={`text-[25px] ${nav ? 'block' : 'hidden'} md:block`} onClick={() => setNav(!nav)}/>
                 </div>
-                <div className={`flex flex-col gap-5 text-[14px] md:text-[16px] lg:text-[18px] md:text-slate-500 ${nav ? 'block' : 'hidden'} md:pb-32 md:block`}>
-                    <div className='flex items-center justify-start gap-3 md:pb-4'>
+                <div className={`flex flex-col gap-5 text-[13px] md:text-[14px] lg:text-[16px] md:text-slate-500 ${nav ? 'block' : 'hidden'} md:pb-32 md:block`}>
+                    <div className='border-b flex items-center justify-start gap-3 md:pb-4'>
                         <FaHome />
                         <a href="">Home</a>
                     </div>
-                    <div className='flex items-center justify-start gap-3 md:pb-4'>
+                    <div className='border-b flex items-center justify-start gap-3 md:pb-4'>
                         <MdOutlineAttachMoney />
-                        <a href="">Transactions</a>
+                        <button>
+                            <p onClick={() => setOnglet(!onglet)}>Transactions</p>
+                        </button>
                     </div>
-                    <div className='flex items-center justify-start gap-3 md:pb-4'>
+                    <div className='border-b flex items-center justify-start gap-3 md:pb-4'>
                         <IoSettingsSharp />
                         <a href={route('profile.edit')}>Settings</a>
                     </div>
@@ -55,13 +67,21 @@ const Dash = ({ auth }) => {
                 </div>
             </div>
             <div className='container mx-auto pt-5'>
-                <div className='flex justify-between border-b pb-2 border-[#5038ED] px-5'>
+                <div className='flex justify-between border-b pb-2 border-[#5038ED] px-5 font-semibold'>
                     <div className='pl-14 md:pl-0'>
-                        <p className='font-semibold'><a href={route('dashboard')}>Dashboard</a></p>
+                        <p className=''><a href={route('dashboard')}>Dashboard</a></p>
                     </div>
                     <div>
-                        {auth && <p>{auth.name}</p>}
+                        <p><a href={route('profile.edit')}>{data.name}</a></p>
                     </div>
+                </div>
+                <div>
+                    {
+                        onglet ? 
+                        <Transdash />
+                        :
+                        <Homedash />
+                    }
                 </div>
             </div>
         </div>

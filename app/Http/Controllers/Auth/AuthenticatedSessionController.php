@@ -26,7 +26,7 @@ class AuthenticatedSessionController extends Controller
         $remember = request()->has('remember');
         if (Auth::attempt(['email' => $usermail, 'password' => $password], $remember)) {
             // The user is being remembered...
-            return redirect()->intended('dashboard');
+            return redirect()->intended('login');
         } else {
             // The user is not being remembered...
             return redirect()->back()->withInput();
@@ -56,6 +56,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/login');
     }
 }

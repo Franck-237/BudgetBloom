@@ -9,7 +9,12 @@ const Main = () => {
         <div className='flex flex-col-reverse md:flex-row justify-center items-center gap-10 md:gap-5 py-20'>
             <div className='md:w-1/2 flex flex-col gap-10 items-start'>
                 <div>
-                    <p className='font-bold'>
+                    <h1 className='font-bold text-[16px] md:text-[18px] lg:text-[24px]'>
+                        It is time to try it
+                    </h1>
+                </div>
+                <div>
+                    <p className=''>
                     With a solid financial plan in hand, you can now take control of your finances and achieve your financial goals more easily. We're with you every step of the way, offering free online resources and personalized advice.
                     </p>
                 </div>
