@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\User;
+use Inertia\Inertia;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -15,8 +16,9 @@ class DashboardController extends Controller
         $user = auth()->user();
         $revenues = $user->revenues;
         $transactions = $user->transactions;
+        $totalBalance = $this->calculateTotalBalance($user);
 
-        return Inertia::render('Dashboard', compact(user, revenues, transactions));
+        return Inertia::render('Dashboard', compact('user', 'revenues', 'transactions', 'totalBalance'));
     }
 
     /**
@@ -65,5 +67,17 @@ class DashboardController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function calculateTotalBalance(User $user)
+    {
+        $totalBalance = $user->revenues()->sum('salary') +
+                    $user->revenues()->sum('placement') +
+                    $user->revenues()->sum('others');
+
+        $transactions = $user->transactions->sum('amount');
+        $totalBalance -= $transactions;
+
+        return $totalBalance;
     }
 }

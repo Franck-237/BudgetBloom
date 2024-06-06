@@ -6,7 +6,7 @@ import { MdClose } from "react-icons/md";
 import { enablePageScroll } from 'scroll-lock';
 
 
-const Navbar = () => { 
+const Navbar = () => {
 
     const Links = [
         {
@@ -19,12 +19,12 @@ const Navbar = () => {
             path: 'dashboard'
         }
     ];
-    
+
     const [nav, setNav] = useState(false);
 
     const handleClick = () => {
         if (!nav) return;
-    
+
         enablePageScroll();
         setNav(false);
       };
@@ -40,7 +40,7 @@ const Navbar = () => {
                     {
                         nav ?
                         <MdClose className='text-[#5038ED] w-[24px] h-[29.58px] md:hidden'/>
-                        : 
+                        :
                         <RiMenu2Line className='text-[#5038ED] w-[24px] h-[29.58px] md:hidden'/>
                     }
                 </div>

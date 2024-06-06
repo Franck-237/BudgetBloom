@@ -51,7 +51,7 @@ class RevenueController extends Controller
             $user->revenues()->create($request->only('salary', 'placement', 'others'));
         }
 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Admin');
     }
 
     /**

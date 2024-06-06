@@ -43,7 +43,7 @@ class TransactionController extends Controller
         $user = auth()->user(); // Récupère l'utilisateur connecté
         $user->transactions()->create($request->only('amount', 'description', 'categories'));
 
-        return Inertia::render('Dashboard');
+        return Inertia::render('Admin');
     }
 
     /**

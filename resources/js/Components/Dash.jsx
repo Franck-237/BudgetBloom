@@ -11,7 +11,7 @@ import { IoMdClose } from "react-icons/io";
 import Homedash from './Homedash';
 import Transdash from './Transdash';
 
-const Dash = () => {
+const Dash = ({revenues, transactions, totalBalance}) => {
 
     const [nav, setNav] = useState(false);
 
@@ -86,7 +86,7 @@ const Dash = () => {
                         onglet ?
                         <Transdash />
                         :
-                        <Homedash />
+                        <Homedash revenues={revenues} transactions={transactions} totalBalance={totalBalance}/>
                     }
                 </div>
             </div>
