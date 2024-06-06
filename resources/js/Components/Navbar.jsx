@@ -3,8 +3,10 @@ import React, { useState } from 'react';
 import Button from './Button';
 import { RiMenu2Line } from "react-icons/ri";
 import { MdClose } from "react-icons/md";
+import { enablePageScroll } from 'scroll-lock';
 
-const Navbar = () => {
+
+const Navbar = () => { 
 
     const Links = [
         {
@@ -19,6 +21,13 @@ const Navbar = () => {
     ];
     
     const [nav, setNav] = useState(false);
+
+    const handleClick = () => {
+        if (!nav) return;
+    
+        enablePageScroll();
+        setNav(false);
+      };
 
   return (
     <div className='bg-light border-b-2 border-[#5038ED]'>
@@ -39,7 +48,7 @@ const Navbar = () => {
                     <ul className='flex flex-col items-center justify-center md:flex-row gap-5'>
                         {Links.map((data) =>(
                             <li key={data.id}>
-                                <a href={data.path} className='hover:text-[#5038ED] text-[14px] md:text-[16px] lg:text-[18px]'>{data.title}</a>
+                                <a href={data.path} onClick={handleClick} className='hover:text-[#5038ED] text-[14px] md:text-[16px] lg:text-[18px]'>{data.title}</a>
                             </li>
                         ))}
                     </ul>

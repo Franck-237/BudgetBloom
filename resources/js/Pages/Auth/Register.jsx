@@ -28,7 +28,6 @@ export default function Register() {
 
     const submit = (e) => {
         e.preventDefault();
-
         post(route('register'));
     };
 
@@ -69,7 +68,7 @@ export default function Register() {
                                 autoComplete="username"
                                 onChange={(e) => setData('email', e.target.value)}
                                 required
-                                placeholder='User@gmail.com'
+                                placeholder='franck@gmail.com'
                             />
 
                             <InputError message={errors.email} className="mt-2" />

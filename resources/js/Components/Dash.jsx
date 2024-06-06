@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import SecondaryButton from './SecondaryButton';
 import PrimaryButton from './PrimaryButton';
 import { useForm, usePage } from '@inertiajs/react';
+import { enablePageScroll } from 'scroll-lock';
 
 import { FaHome } from "react-icons/fa";
 import { MdOutlineAttachMoney } from "react-icons/md";
@@ -15,26 +15,32 @@ const Dash = () => {
 
     const [nav, setNav] = useState(false);
 
+    const handleClick = () => {
+        if (!nav) return;
+
+        enablePageScroll();
+        setNav(false);
+      };
+
     const [onglet, setOnglet] = useState(false);
 
 
     const user = usePage().props.auth.user;
 
-    const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
+    const { data, setData, patch, errors, processing, recentlySuccessful, post } = useForm({
         name: user.name,
         email: user.email,
     });
 
     const submit = (e) => {
         e.preventDefault();
-
         post(route('logout'));
     };
 
   return (
     <div>
         <div className='flex'>
-            <div className={`absolute md:relative pl-10 pr-5 md:pr-0 h-[100vh] pt-5 bg-[#5038ED] md:bg-white text-white border-r border-[#5038ED] ${nav ? '' : 'pl-3'} md:left-0`}>
+            <div className={`absolute md:relative pl-10 pr-5 md:pr-0 h-[120vh] md:h-[100vh] pt-5 bg-[#5038ED] md:bg-white text-white border-r border-[#5038ED] ${nav ? '' : 'pl-3'} md:left-0`}>
                 <div className={`md:hidden pb-10 ${nav ? 'hidden' : 'block'}`} onClick={() => setNav(!nav)}>
                     <RxHamburgerMenu className='text-white text-[25px] md:hidden'/>
                 </div>
@@ -45,17 +51,17 @@ const Dash = () => {
                 <div className={`flex flex-col gap-5 text-[13px] md:text-[14px] lg:text-[16px] md:text-slate-500 ${nav ? 'block' : 'hidden'} md:pb-32 md:block`}>
                     <div className='border-b flex items-center justify-start gap-3 md:pb-4'>
                         <FaHome />
-                        <a href="">Home</a>
+                        <a href="" onClick={handleClick}>Home</a>
                     </div>
                     <div className='border-b flex items-center justify-start gap-3 md:pb-4'>
                         <MdOutlineAttachMoney />
-                        <button>
+                        <button onClick={handleClick}>
                             <p onClick={() => setOnglet(!onglet)}>Transactions</p>
                         </button>
                     </div>
                     <div className='border-b flex items-center justify-start gap-3 md:pb-4'>
                         <IoSettingsSharp />
-                        <a href={route('profile.edit')}>Settings</a>
+                        <a href={route('profile.edit')} onClick={handleClick}>Settings</a>
                     </div>
                 </div>
                 <div className={`mt-20 md:mt-0 ${nav ? 'block' : 'hidden'} md:block`}>
@@ -77,7 +83,7 @@ const Dash = () => {
                 </div>
                 <div>
                     {
-                        onglet ? 
+                        onglet ?
                         <Transdash />
                         :
                         <Homedash />

@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Transaction;
+
 use Inertia\Inertia;
 
-use App\Models\Revenue;
 use Illuminate\Http\Request;
 
-class RevenueController extends Controller
+class TransactionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,27 +30,18 @@ class RevenueController extends Controller
      */
     public function store(Request $request)
     {
-        //Revenue::create($request->all());
+        //$transaction = Transaction::create($request->all());
         //return redirect('/dashboard');
+        //event(new Registered($transaction));
 
         $request->validate([
-            'salary' => 'required|numeric',
-            'placement' => 'numeric',
-            'others' => 'numeric',
+            'amount' => 'required|numeric',
+            'description' => 'required|string',
+            'categories' => 'required|string',
         ]);
 
         $user = auth()->user(); // Récupère l'utilisateur connecté
-
-        // Recherche le revenu de l'utilisateur
-        $revenue = $user->revenues()->first();
-
-        if ($revenue) {
-            // Met à jour le revenu existant
-            $revenue->update($request->only('salary', 'placement', 'others'));
-        } else {
-            // Crée un nouveau revenu pour l'utilisateur
-            $user->revenues()->create($request->only('salary', 'placement', 'others'));
-        }
+        $user->transactions()->create($request->only('amount', 'description', 'categories'));
 
         return Inertia::render('Dashboard');
     }
@@ -57,7 +49,7 @@ class RevenueController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Revenue $revenue)
+    public function show(string $id)
     {
         //
     }
@@ -65,7 +57,7 @@ class RevenueController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Revenue $revenue)
+    public function edit(string $id)
     {
         //
     }
@@ -73,7 +65,7 @@ class RevenueController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Revenue $revenue)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -81,7 +73,7 @@ class RevenueController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Revenue $revenue)
+    public function destroy(string $id)
     {
         //
     }

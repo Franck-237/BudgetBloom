@@ -9,7 +9,7 @@ class Revenue extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'salary', 'placement', 'others'];
+    protected $fillable = ['salary', 'placement', 'others'];
 
     public function user()
     {

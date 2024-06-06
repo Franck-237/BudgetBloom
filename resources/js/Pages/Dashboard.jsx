@@ -1,6 +1,5 @@
 
 import { Head } from '@inertiajs/react';
-import PrimaryButton from '@/Components/PrimaryButton';
 
 import Dash from '@/Components/Dash';
 
